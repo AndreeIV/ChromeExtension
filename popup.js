@@ -2,6 +2,7 @@
 const counterValueEl = document.getElementById('counter-value');
 const btnIncrement = document.getElementById('btn-increment');
 const btnInspectTab = document.getElementById('btn-inspect-tab');
+const btnPageStats = document.getElementById('btn-page-stats');
 const btnHighlight = document.getElementById('btn-highlight');
 const tabInfoEl = document.getElementById('tab-info');
 const statusMsgEl = document.getElementById('status-msg');
@@ -35,6 +36,26 @@ btnInspectTab.addEventListener('click', async () => {
   } catch (error) {
     statusMsgEl.textContent = 'Error al leer la pestaña';
     console.error(error);
+  }
+});
+
+// 2.b. Obtener estadísticas de la página a través del Content Script
+btnPageStats.addEventListener('click', async () => {
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (!tab || !tab.id) return;
+
+    chrome.tabs.sendMessage(tab.id, { action: 'GET_PAGE_STATS' }, (response) => {
+      if (chrome.runtime.lastError || !response) {
+        statusMsgEl.textContent = 'Actualiza la página web para cargar el script';
+        return;
+      }
+      tabInfoEl.style.display = 'block';
+      tabInfoEl.textContent = `📊 Elementos: ${response.images} imágenes, ${response.links} enlaces, ${response.paragraphs} párrafos.`;
+      statusMsgEl.textContent = 'Estadísticas obtenidas';
+    });
+  } catch (error) {
+    statusMsgEl.textContent = 'Error al consultar la página';
   }
 });
 
