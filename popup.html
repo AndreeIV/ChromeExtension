@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Extensión</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="card">
+    <header class="header">
+      <div class="logo-container">
+        <span class="badge">V3</span>
+        <h2>Mi Extensión</h2>
+      </div>
+      <p class="subtitle">Plantilla de prueba lista para usar</p>
+    </header>
+
+    <main class="content">
+      <!-- Sección 1: Contador persistente -->
+      <section class="section">
+        <label class="section-label">1. Almacenamiento local (Storage)</label>
+        <div class="counter-box">
+          <span id="counter-value">0</span>
+          <button id="btn-increment" class="btn btn-primary">+ Incrementar</button>
+        </div>
+      </section>
+
+      <!-- Sección 2: Acción en la pestaña activa -->
+      <section class="section">
+        <label class="section-label">2. Interactuar con la pestaña actual</label>
+        <button id="btn-inspect-tab" class="btn btn-secondary">
+          🔍 Leer título de esta pestaña
+        </button>
+        <p id="tab-info" class="tab-info"></p>
+      </section>
+
+      <!-- Sección 3: Cambiar color de fondo -->
+      <section class="section">
+        <label class="section-label">3. Inyectar cambio visual</label>
+        <button id="btn-highlight" class="btn btn-accent">
+          🎨 Resaltar fondo de la página
+        </button>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span id="status-msg">Estado: Lista para probar</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
